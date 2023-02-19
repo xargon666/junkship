@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Box, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import {Buttons} from './Buttons'
 interface GameState {
   // Define the game state here
@@ -56,29 +56,33 @@ function Game() {
   }
 
   return (
-    <Grid container direction="column" justifyContent="center" alignItems="center" spacing={1}>
-        <Grid item>
-            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
-            {gameMode === GameMode.VERB && (
-              <Buttons 
-                onClick={handleVerbClick} 
-                buttonText={['go','look','take']}
-                gameMode={gameMode}
-                cancel={handleCancelClick} />
-              )}
-            {gameMode === GameMode.DIRECTION && (
-              <Buttons 
-              onClick={handleDirectionClick} 
-              buttonText={['north','south','east','west']}
-              gameMode={gameMode}
-              cancel={handleCancelClick} />
-              )}
-            <Box mt={1} textAlign="center">
-                {gameResponse}
-            </Box>
-            </Box>
-        </Grid>
-    </Grid>
+    <>
+      <Box alignItems="center" sx={{ position: 'fixed', top: "50vh", left: 0, width: '100%', zIndex: 1 }}>
+        <Box textAlign="center" sx={{ pt:"10px", border: 1, height:"16vh"}} >
+          {gameResponse}
+        </Box>
+      </Box>
+<Box sx={{ position: 'fixed', top: "70vh", left: 0, width: '100%', zIndex: 1 }}>
+  <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+    {gameMode === GameMode.VERB && (
+      <Buttons
+        onClick={handleVerbClick}
+        buttonText={['go', 'look', 'take', 'use']}
+        gameMode={gameMode}
+        cancel={handleCancelClick}
+      />
+    )}
+    {gameMode === GameMode.DIRECTION && (
+      <Buttons
+        onClick={handleDirectionClick}
+        buttonText={['north', 'south', 'east', 'west']}
+        gameMode={gameMode}
+        cancel={handleCancelClick}
+      />
+    )}
+  </Box>
+</Box>
+    </>
   );
 }
 
